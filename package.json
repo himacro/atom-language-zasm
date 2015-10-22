@@ -1,0 +1,13 @@
+{
+  "name": "language-zasm",
+  "main": "./lib/language-zasm",
+  "version": "0.0.1",
+  "description": "HLASM language support",
+  "repository": "https://github.com/himacro/language-zasm-atom",
+  "license": "MIT",
+  "engines": {
+    "atom": ">=1.0.0 <2.0.0"
+  },
+  "dependencies": {
+  }
+}

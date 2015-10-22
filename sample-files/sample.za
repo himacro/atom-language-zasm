@@ -1,0 +1,13 @@
+# comment
+.# comment in macro
+#---+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8
+label operator operand1 comment                                        X
+               operand2 comment                                        X
+               operand3 comment
+      oeser
+      IF       operand1 comment                                        X
+               operand2,'string',L'ss, comment                         X
+               operand3,L'SS comment                                   X
+               operand4,'string ' comment
+
+#---+----1----+----2----+----3----+----4----+----5----+----6----+----7----+----8

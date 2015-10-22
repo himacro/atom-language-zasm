@@ -1,0 +1,55 @@
+'scopeName': 'source.zasm'
+'name': 'zasm'
+'fileTypes': [
+  'za'
+  'zm'
+  'zasm'
+  'zmacro'
+]
+'patterns': [
+    {
+        'match': '^(#|\.#).*$'
+        'name': 'comment'
+    }
+    {
+        'begin': '^(\\S*)\\s+(?:(IF|ENDIF|ELSE)|(\\S+))[[:blank:]]*'
+        'beginCaptures':
+            '1':
+                'name': 'entity'
+            '2':
+                'name': 'keyword.control'
+            '3':
+                'name': 'keyword.control'
+        'end': '(?<!^.{71}\\S)\\s$'
+        'patterns': [
+            {
+                'match': '^\\s+'
+            }
+            {
+                'match': '[ldLD]\''
+            }
+            {
+                'match': ','
+                'name': 'comment'
+            }
+            {
+                'include': '#string'
+            }
+            {
+                'match': '\\s+.*'
+                'name': 'comment'
+            }
+        ]
+    }
+]
+'repository':
+  'string':
+    'begin': '\''
+    'beginCaptures':
+      '0':
+        'name': 'punctuation.definition.string.begin.zasm'
+    'end': '\''
+    'endCaptures':
+      '0':
+        'name': 'punctuation.definition.string.end.zasm'
+    'name': 'string.quoted.single.zasm'
