@@ -1,29 +1,37 @@
 'scopeName': 'source.zasm'
 'name': 'zasm'
 'fileTypes': [
-  'za'
+  'zs'
   'zm'
   'zasm'
   'zmacro'
 ]
 'patterns': [
     {
-        'match': '^(#|\.#).*$'
+        'match': '^(\\*|\\.\\*).*$'
         'name': 'comment'
     }
     {
-        'begin': '^(\\S*)\\s+(?:(IF|ENDIF|ELSE)|(\\S+))[[:blank:]]*'
-        'beginCaptures':
-            '1':
-                'name': 'entity'
-            '2':
-                'name': 'keyword.control'
-            '3':
-                'name': 'keyword.control'
-        'end': '(?<!^.{71}\\S)\\s$'
+        'match': '^(\\S*)\\s+'
+        'name': 'string'
+    }
+    {
+        'match': '(IF|ENDIF|ELSE|DO|ENDO)'
+        'name': 'keyword.control'
+    }
+    {
+        'match': '\\S+'
+        'name': 'keyword.control'
+    }
+    {
+        'begin': '[[:blank:]]+'
+        'end': '(?<!^.{71}\\S)\\n'
         'patterns': [
             {
-                'match': '^\\s+'
+                'match': '^(-)?\\s+'
+                'captures':
+                    '0':
+                        'name': 'comment'
             }
             {
                 'match': '[ldLD]\''
