@@ -1,63 +1,85 @@
-'scopeName': 'source.zasm'
-'name': 'zasm'
-'fileTypes': [
+scopeName: 'source.zasm'
+name: 'zasm'
+fileTypes: [
   'zs'
   'zm'
   'zasm'
   'zmacro'
 ]
-'patterns': [
+#TODO: find proper names
+patterns: [
     {
-        'match': '^(\\*|\\.\\*).*$'
-        'name': 'comment'
+        match: '^(?:\\*|\\.\\*).*$'
+        name: 'comment.line.character.zasm'
     }
     {
-        'match': '^(\\S*)\\s+'
-        'name': 'string'
+        match: '^(\\S+)\\s+(?=@RTNENT\\b)'
+        captures:
+            0:
+                name: 'entity.name.function.zasm'
     }
     {
-        'match': '(IF|ENDIF|ELSE|DO|ENDO)'
-        'name': 'keyword.control'
+        match: '^(\\S*)\\s+'
+        captures:
+            0:
+                name: 'entity.name.tag.zasm'
     }
     {
-        'match': '\\S+'
-        'name': 'keyword.control'
+        match: '\\b(?:IF|ELSE|ENDIF|DO|LEAVE|ITERATE|LEAVEIF|ITERATIF|ENDO|CASE|ENDCASE|WHEN|GOTO|GOLABEL)\\b'
+        name: 'keyword.control.zasm'
     }
     {
-        'begin': '[[:blank:]]+'
-        'end': '(?<!^.{71}\\S)\\n'
-        'patterns': [
+        match: '\\b(?:@PGMENT|@RTNENT|@EXIT|@GO|CALL|LINK)\\b'
+        name: 'keyword.control.zasm'
+    }
+    {
+        match: '@\\S+'
+        name: 'support.function.macro.zasm'
+    }
+    {
+        match: '\\b(?:USING|PUSH|POP|DROP)\\b'
+        name: 'support.function.control.zasm'
+    }
+    {
+        match: '\\S+'
+        name: 'support.function.machine.zasm'
+    }
+    {
+        begin: '[[:blank:]]+'
+        end: '(?<!^.{71}\\S)\\n'
+        patterns: [
             {
-                'match': '^(-)?\\s+'
-                'captures':
-                    '0':
-                        'name': 'comment'
+                match: '^(-)?\\s+'
+                captures:
+                    0:
+                        name: 'comment.line.character.zasm'
             }
             {
-                'match': '[ldLD]\''
+                match: '[kKldLD]\'[\\w&@#$]+'
+                name: 'constant.language.attribute.zasm'
             }
             {
-                'match': ','
-                'name': 'comment'
+                match: ','
+                name: 'punctuation'
             }
             {
-                'include': '#string'
+                include: '#string'
             }
             {
-                'match': '\\s+.*'
-                'name': 'comment'
+                match: '\\s+.*'
+                name: 'comment.line.character.zasm'
             }
         ]
     }
 ]
-'repository':
-  'string':
-    'begin': '\''
-    'beginCaptures':
-      '0':
-        'name': 'punctuation.definition.string.begin.zasm'
-    'end': '\''
-    'endCaptures':
-      '0':
-        'name': 'punctuation.definition.string.end.zasm'
-    'name': 'string.quoted.single.zasm'
+repository:
+  string:
+    begin: '\''
+    beginCaptures:
+      0:
+        name: 'punctuation.definition.string.begin.zasm'
+    end: '\''
+    endCaptures:
+      0:
+        name: 'punctuation.definition.string.end.zasm'
+    name: 'string.quoted.single.zasm'
