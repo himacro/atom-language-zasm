@@ -55,7 +55,7 @@ patterns: [
                         name: 'comment.line.character.zasm'
             }
             {
-                match: '[kKldLD]\'[\\w&@#$]+'
+                match: '[tTkKlLdD]\'[a-zA-Z&@#$][\\w+&@#$\\.]*'
                 name: 'constant.language.attribute.zasm'
             }
             {
